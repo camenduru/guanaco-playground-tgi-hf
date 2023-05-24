@@ -270,4 +270,4 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
 
     clear_chat_button.click(clear_chat, outputs=[chatbot, history])
 
-demo.queue(concurrency_count=16).launch(debug=True)
+demo.queue(concurrency_count=16).launch(debug=True, share=True)
