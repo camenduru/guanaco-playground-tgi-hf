@@ -235,11 +235,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
                     "biased, or otherwise offensive outputs.",
                     elem_classes=["disclaimer"],
                 )
-            with gr.Row():
-                gr.Markdown(
-                    "[Privacy policy](https://gist.github.com/samhavens/c29c68cdcd420a9aa0202d0839876dac)",
-                    elem_classes=["disclaimer"],
-                )
 
 
     history = gr.State([])
