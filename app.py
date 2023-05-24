@@ -227,6 +227,21 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
                     outputs=[output],
                 )
 
+            with gr.Row():
+                gr.Markdown(
+                    "Disclaimer: The model can produce factually incorrect output, and should not be relied on to produce "
+                    "factually accurate information. The model was trained on various public datasets; while great efforts "
+                    "have been taken to clean the pretraining data, it is possible that this model could generate lewd, "
+                    "biased, or otherwise offensive outputs.",
+                    elem_classes=["disclaimer"],
+                )
+            with gr.Row():
+                gr.Markdown(
+                    "[Privacy policy](https://gist.github.com/samhavens/c29c68cdcd420a9aa0202d0839876dac)",
+                    elem_classes=["disclaimer"],
+                )
+
+
     history = gr.State([])
     last_user_message = gr.State("")
 
