@@ -45,8 +45,8 @@ def has_no_history(chatbot, history):
     return not chatbot and not history
 
 
-header = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. "
-prompt_template = "### Human: {query} ### Assistant:{response}"
+header = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions."
+prompt_template = "### Human: {query}\n ### Assistant:{response}"
 
 def generate(
     user_message,
@@ -78,7 +78,7 @@ def generate(
         for i in range(0, len(past_messages), 2):
             intermediate_prompt = prompt_template.format(query=past_messages[i]["content"], response=past_messages[i+1]["content"])
             print("intermediate: ", intermediate_prompt)
-            prompt = prompt + intermediate_prompt
+            prompt = prompt + '\n' + intermediate_prompt
 
         prompt = prompt + prompt_template.format(query=user_message, response="")
 
