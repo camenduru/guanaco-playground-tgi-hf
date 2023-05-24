@@ -53,7 +53,6 @@ def generate(
     chatbot,
     history,
     temperature,
-    top_k,
     top_p,
     max_new_tokens,
     repetition_penalty,
@@ -86,7 +85,6 @@ def generate(
 
     generate_kwargs = {
         "temperature": temperature,
-        "top_k": top_k,
         "top_p": top_p,
         "max_new_tokens": max_new_tokens,
     }
@@ -167,10 +165,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             gr.Markdown(
                 """
             💻 This demo showcases the Guanaco 33B model, released together with the paper [QLoRA](https://arxiv.org/abs/2305.14314)
-
-
-            The model can produce factually incorrect output, and should not be relied on to produce factually accurate information.
-            The model was trained on various public datasets; while great efforts have been taken to clean the pretraining data, it is possible that this model could generate lewd, biased, or otherwise offensive outputs.
     """
             )
 
@@ -190,25 +184,16 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             with gr.Accordion(label="Parameters", open=False, elem_id="parameters-accordion"):
                 temperature = gr.Slider(
                     label="Temperature",
-                    value=0.2,
+                    value=0.7,
                     minimum=0.0,
                     maximum=1.0,
                     step=0.1,
                     interactive=True,
                     info="Higher values produce more diverse outputs",
                 )
-                top_k = gr.Slider(
-                    label="Top-k",
-                    value=50,
-                    minimum=0.0,
-                    maximum=100,
-                    step=1,
-                    interactive=True,
-                    info="Sample from a shortlist of top-k tokens",
-                )
                 top_p = gr.Slider(
                     label="Top-p (nucleus sampling)",
-                    value=0.95,
+                    value=0.9,
                     minimum=0.0,
                     maximum=1,
                     step=0.05,
@@ -217,7 +202,7 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
                 )
                 max_new_tokens = gr.Slider(
                     label="Max new tokens",
-                    value=512,
+                    value=1024,
                     minimum=0,
                     maximum=1024,
                     step=4,
@@ -252,7 +237,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             chatbot,
             history,
             temperature,
-            top_k,
             top_p,
             max_new_tokens,
             repetition_penalty,
@@ -267,7 +251,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             chatbot,
             history,
             temperature,
-            top_k,
             top_p,
             max_new_tokens,
             repetition_penalty,
