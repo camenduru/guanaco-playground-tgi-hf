@@ -46,7 +46,7 @@ def has_no_history(chatbot, history):
 
 
 header = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions."
-prompt_template = "### Human: {query}\n ### Assistant:{response}"
+prompt_template = "### Human: {query}\n### Assistant:{response}"
 
 def generate(
     user_message,
