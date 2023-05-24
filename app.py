@@ -49,7 +49,6 @@ header = "A chat between a curious human and an artificial intelligence assistan
 prompt_template = "### Human: {query} ### Assistant:{response}"
 
 def generate(
-    system_message,
     user_message,
     chatbot,
     history,
@@ -58,7 +57,6 @@ def generate(
     top_p,
     max_new_tokens,
     repetition_penalty,
-    do_save=True,
 ):
     # Don't return meaningless message when the input is empty
     if not user_message:
@@ -115,7 +113,6 @@ def generate(
 
     output = ""
     for idx, response in enumerate(stream):
-        print(f'step {idx} - {response.token.text}')
         if response.token.text == '':
             break
 
@@ -173,18 +170,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
     """
             )
 
-    with gr.Row():
-        do_save = gr.Checkbox(
-            value=True,
-            label="Store data",
-            info="You agree to the storage of your prompt and generated text for research and development purposes:",
-        )
-    with gr.Accordion(label="System Prompt", open=False, elem_id="parameters-accordion"):
-        system_message = gr.Textbox(
-            elem_id="system-message",
-            placeholder="Below is a conversation between a human user and a helpful AI coding assistant.",
-            show_label=False,
-        )
     with gr.Row():
         with gr.Box():
             output = gr.Markdown()
@@ -254,13 +239,11 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
                 )
 
     history = gr.State([])
-    # To clear out "message" input textbox and use this to regenerate message
     last_user_message = gr.State("")
 
     user_message.submit(
         generate,
         inputs=[
-            system_message,
             user_message,
             chatbot,
             history,
@@ -269,7 +252,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             top_p,
             max_new_tokens,
             repetition_penalty,
-            do_save,
         ],
         outputs=[chatbot, history, last_user_message, user_message],
     )
@@ -277,7 +259,6 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
     send_button.click(
         generate,
         inputs=[
-            system_message,
             user_message,
             chatbot,
             history,
@@ -286,12 +267,10 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             top_p,
             max_new_tokens,
             repetition_penalty,
-            do_save,
         ],
         outputs=[chatbot, history, last_user_message, user_message],
     )
 
     clear_chat_button.click(clear_chat, outputs=[chatbot, history])
-    # share_button.click(None, [], [], _js=share_js)
 
 demo.queue(concurrency_count=16).launch(debug=True)
