@@ -204,7 +204,7 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
                     label="Max new tokens",
                     value=1024,
                     minimum=0,
-                    maximum=1024,
+                    maximum=2048,
                     step=4,
                     interactive=True,
                     info="The maximum numbers of new tokens",
