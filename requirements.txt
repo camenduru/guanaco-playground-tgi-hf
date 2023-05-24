@@ -1,0 +1,8 @@
+einops
+gradio
+torch
+transformers
+sentencepiece
+bitsandbytes
+accelerate
+text-generation
