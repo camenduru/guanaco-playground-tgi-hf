@@ -167,6 +167,10 @@ with gr.Blocks(analytics_enabled=False, css=custom_css) as demo:
             gr.Markdown(
                 """
             💻 This demo showcases the Guanaco 33B model, released together with the paper [QLoRA](https://arxiv.org/abs/2305.14314)
+
+
+            The model can produce factually incorrect output, and should not be relied on to produce factually accurate information.
+            The model was trained on various public datasets; while great efforts have been taken to clean the pretraining data, it is possible that this model could generate lewd, biased, or otherwise offensive outputs.
     """
             )
 
